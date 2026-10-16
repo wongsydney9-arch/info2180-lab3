@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function(){
         function(square){
             square.classList.add("square");
             square.addEventListener("click", xo);
+            square.addEventListener("mouseover", hover);
+            square.addEventListener("mouseout", nothover);
     });
 });
 
@@ -21,4 +23,14 @@ function xo(event){
             plays.push(event.target);
         }
     }
+}
+
+function hover(event){
+    const square = event.target;
+    square.classList.add("hover");
+}
+
+function nothover(event){
+    const square = event.target;
+    square.classList.remove("hover");
 }
