@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(){
     const squares = document.querySelectorAll('#board div');
+    const button = document.querySelector('.btn');
     squares.forEach(
         function(square){
             square.classList.add("square");
             square.addEventListener("click", xo);
+            square.addEventListener("click", checkWinner);
             square.addEventListener("mouseover", hover);
             square.addEventListener("mouseout", notHover);
     });
+    button.addEventListener("click", newGame);
 });
 
 const plays = [];
@@ -23,7 +26,6 @@ function xo(event){
             plays.push(event.target);
         }
     }
-    checkWinner();
 }
 
 function hover(event){
@@ -55,7 +57,7 @@ function checkWinner(){
             s2 = squares[r[1]].textContent;
             s3 = squares[r[2]].textContent;
 
-            if((s1 !== "" && s2 !== "" && s3 !== "") &&
+            if ((s1 !== "" && s2 !== "" && s3 !== "") &&
             (s1 == s2 && s2 == s3)){
                 let winner = "";
                 if(s1 == "X")
@@ -70,4 +72,21 @@ function checkWinner(){
             }
         }
     }
+}
+
+function newGame(){
+    winFound = false;
+    const squares = document.querySelectorAll("#board div");
+    const msg = document.querySelector('#status');
+    msg.classList.remove('you-won');
+    msg.textContent = "Move your mouse over a square and click to play an X or an O."
+    squares.forEach(
+        function(square){
+            if (square.textContent === "X")
+                square.classList.remove('X');
+            else
+                square.classList.remove('O');
+            square.textContent = '';
+        }
+    )
 }
